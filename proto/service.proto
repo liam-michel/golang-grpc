@@ -1,0 +1,27 @@
+syntax = "proto3";
+
+package example;
+
+// This specifies where the Go package for generated code will be.
+option go_package = "./proto/examplepb";
+
+service ExampleService {
+  rpc SayHello (HelloRequest) returns (HelloResponse);
+  rpc SquareNumber(SquareNumberRequest) returns (SquareNumberResponse);
+}
+
+message SquareNumberRequest {
+  int32 number = 1;
+}
+
+message SquareNumberResponse{
+  int32 result = 1;
+}
+
+message HelloRequest {
+  string name = 1;
+}
+
+message HelloResponse {
+  string message = 1;
+}
