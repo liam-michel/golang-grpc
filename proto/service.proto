@@ -2,19 +2,30 @@ syntax = "proto3";
 
 package example;
 
-// This specifies where the Go package for generated code will be.
 option go_package = "./proto/examplepb";
 
+import "google/api/annotations.proto";
+
 service ExampleService {
-  rpc SayHello (HelloRequest) returns (HelloResponse);
-  rpc SquareNumber(SquareNumberRequest) returns (SquareNumberResponse);
+  rpc SayHello (HelloRequest) returns (HelloResponse) {
+    option (google.api.http) = {
+      post: "/v1/hello"
+      body: "*"
+    };
+  }
+  rpc SquareNumber(SquareNumberRequest) returns (SquareNumberResponse) {
+    option (google.api.http) = {
+      post: "/v1/square"
+      body: "*"
+    };
+  }
 }
 
 message SquareNumberRequest {
   int32 number = 1;
 }
 
-message SquareNumberResponse{
+message SquareNumberResponse {
   int32 result = 1;
 }
 
